@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>My Project</title>
+  <meta name="description" content="Project page for My Project." />
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; }
+    header { padding: 56px 20px; background: #0b1220; color: white; }
+    main { max-width: 920px; margin: 0 auto; padding: 28px 20px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 14px; padding: 16px; margin: 16px 0; }
+    a { color: #2563eb; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background: #f3f4f6; padding: 2px 6px; border-radius: 6px; }
+    footer { padding: 24px 20px; color: #6b7280; border-top: 1px solid #e5e7eb; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>My Project</h1>
+    <p>A short one-liner about what your project does.</p>
+    <p>
+      <a href="https://github.com/YOUR_USERNAME/my-project" style="color:#93c5fd;">GitHub Repo</a>
+      ·
+      <a href="#install" style="color:#93c5fd;">Install</a>
+      ·
+      <a href="#cite" style="color:#93c5fd;">Cite</a>
+    </p>
+  </header>
+
+  <main>
+    <div class="card">
+      <h2>Overview</h2>
+      <p>Explain the problem, your approach, and what’s new.</p>
+      <ul>
+        <li>Feature 1</li>
+        <li>Feature 2</li>
+        <li>Feature 3</li>
+      </ul>
+    </div>
+
+    <div class="card" id="install">
+      <h2>Installation</h2>
+      <pre><code>pip install my-project</code></pre>
+      <pre><code>my-project --help</code></pre>
+    </div>
+
+    <div class="card">
+      <h2>Quickstart</h2>
+      <pre><code>python -m my_project.run --input data/example.json --out results/</code></pre>
+    </div>
+
+    <div class="card" id="cite">
+      <h2>Citation</h2>
+      <p>If you have a paper, add BibTeX here.</p>
+      <pre><code>@misc{myproject2026,
+  title={My Project},
+  author={Your Name},
+  year={2026},
+  howpublished={\\url{https://github.com/YOUR_USERNAME/my-project}}
+}</code></pre>
+    </div>
+  </main>
+
+  <footer>
+    <small>© <span id="y"></span> Your Name · Built with GitHub Pages</small>
+  </footer>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
