@@ -1,56 +1,350 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tutorial of QVTK </title>
-  <meta name="description" content="Project page for My Project." />
-  <style>
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; }
-    header { padding: 56px 20px; background: #0b1220; color: white; }
-    main { max-width: 920px; margin: 0 auto; padding: 28px 20px; }
-    .card { border: 1px solid #e5e7eb; border-radius: 14px; padding: 16px; margin: 16px 0; }
-    a { color: #2563eb; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    code { background: #f3f4f6; padding: 2px 6px; border-radius: 6px; }
-    footer { padding: 24px 20px; color: #6b7280; border-top: 1px solid #e5e7eb; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Q-VTK: Quantum Visualization Toolkit</title>
+<meta name="description" content="Q-VTK brings together visualization techniques for quantum states, circuits, noisy hardware and quantum neural networks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;background:#F3F4F1;color:#101828;font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;}
+a{color:#2B4BD8;}a:hover{color:#1C33A0;}
+a:focus-visible{outline:3px solid #E39A3B;outline-offset:3px;border-radius:4px;}
+h1,h2,h3{text-wrap:balance;}
+</style>
+<style>html{scroll-behavior:smooth}@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}}</style>
 </head>
 <body>
-  <header>
-    <h1>Tutorial of QVTK</h1>
-    <p>This tutorial outlines the interpretability challenges within quantum computing, focusing on the complexity of recognizing the impact of quantum errors, comprehending compiler optimizations like transpilation, and making sense of results in the presence of noise for programmers familiar with classical computing environments. It underscores the importance for quantum software developers to do more than just build quantum states and operate quantum machines; they must also understand the hardware's quality and its variability. Introducing the QVTK approach, the text aims to provide developers with a comprehensive understanding of quantum circuits and the results produced by quantum computers. This knowledge empowers them to choose the most stable and reliable quantum machine backends wisely and to refine their circuit designs for optimal transpilation, thereby improving the efficiency of quantum computing..</p>
-    <p>
-      <a href="https://github.com/YOUR_USERNAME/my-project" style="color:#93c5fd;">GitHub Repo</a>
-      ·
-      <a href="#install" style="color:#93c5fd;">Install</a>
-      ·
-      <a href="#cite" style="color:#93c5fd;">Cite</a>
-    </p>
-  </header>
+<div style="min-height: 100%; background: #F3F4F1; color: #101828; font-family: 'IBM Plex Sans', system-ui, sans-serif">
 
-  <main>
-    <div class="card">
-      <h2>Overview</h2>
-      <p>The primary challenge in making quantum computing accessible to entry-level users is the complexity of quantum mechanics and the need for specialized knowledge, which makes it difficult for beginners to engage. To address this, our team has developed a tutorial on using the the quantum visualization tool developed by the team of Kent State University and Qradle Inc. The tutorial simplifies these complex concepts through an intuitive graphical interface. Users can manipulate qubit and observe the effects of quantum operations in real-time, helping to bridge the gap between abstract quantum theories and practical applications. In a hands-on lesson using this tool, participants are guided through simple, easy-to-reproduce examples that introduce basic operations like the Hadamard gate, progressing to more complex scenarios such as creating a Bell state to demonstrate entanglement. This structured approach is designed to improve understanding and confidence in exploring quantum computing.</p>
-      <ul>
-        <li>Understanding Quantum Behavior and Errors</li>
-        <li>Optimization of Quantum Algorithms</li>
-        <li>Hardware Selection and Utilization</li>
-        <li>Interpretation of Quantum Results</li>
-      </ul>
-    </div>
+<!-- HEADER + HERO (dark band) -->
+<header style="background: #0E1626; color: #E8ECF4">
+<nav aria-label="Main" style="max-width: 1200px; margin: 0 auto; padding: 20px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; color: #E8ECF4; text-decoration: none">
+<span style="font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 20px; letter-spacing: -0.02em">|Q-VTK⟩</span>
+<span style="font-size: 13px; color: #A9B4C8">Quantum Visualization Toolkit</span>
+</a>
+<div style="display: flex; flex-wrap: wrap; gap: 4px">
+<a href="#layers" style="color: #C9D2E3; text-decoration: none; font-size: 15px; padding: 12px 12px">Layers</a>
+<a href="#modules" style="color: #C9D2E3; text-decoration: none; font-size: 15px; padding: 12px 12px">Modules</a>
+<a href="#workflow" style="color: #C9D2E3; text-decoration: none; font-size: 15px; padding: 12px 12px">Workflow</a>
+<a href="#tutorial" style="color: #C9D2E3; text-decoration: none; font-size: 15px; padding: 12px 12px">Tutorial</a>
+<a href="#publications" style="color: #C9D2E3; text-decoration: none; font-size: 15px; padding: 12px 12px">Publications</a>
+</div>
+</nav>
 
+<div id="top" style="max-width: 1200px; margin: 0 auto; padding: 56px 24px 72px; display: flex; flex-wrap: wrap; gap: 48px; align-items: center">
+<div style="flex: 1 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 22px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.06em; color: #E39A3B">OPEN RESEARCH TOOLKIT · 8 PEER-REVIEWED DESIGNS</p>
+<h1 style="margin: 0; font-size: 56px; line-height: 1.05; font-weight: 700; letter-spacing: -0.025em; color: #FFFFFF">See what your quantum program is doing.</h1>
+<p style="margin: 0; font-size: 19px; line-height: 1.6; color: #C9D2E3; max-width: 620px">Q-VTK brings together visualization techniques for every layer of quantum computing: quantum states, circuits, noisy hardware and quantum neural networks. Each module is built on a published, expert-evaluated visualization design.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 12px; padding-top: 6px">
+<a href="#modules" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 8px; background: #2B4BD8; color: #FFFFFF; text-decoration: none; font-weight: 600; font-size: 16px">Explore the modules</a>
+<a href="#tutorial" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 8px; border: 1px solid #3A4A66; color: #E8ECF4; text-decoration: none; font-weight: 500; font-size: 16px">ASPLOS 2026 tutorial</a>
+</div>
+</div>
 
+<figure style="flex: 1 1 420px; min-width: 0; margin: 0; background: #16213A; border: 1px solid #26355A; border-radius: 14px; padding: 22px 22px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #A9B4C8">3-qubit measurement · noise spread per basis state</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #7E8AA3">illustrative</span>
+</div>
+<svg viewBox="0 0 480 260" width="100%" role="img" aria-label="Illustrative bar chart: measured probability of the eight basis states 000 to 111, with whiskers showing run-to-run noise. States 000 and 111 dominate; 011 shows the widest noise spread.">
+<g stroke="#26355A" stroke-width="1">
+<line x1="40" y1="20" x2="470" y2="20"></line>
+<line x1="40" y1="80" x2="470" y2="80"></line>
+<line x1="40" y1="140" x2="470" y2="140"></line>
+<line x1="40" y1="200" x2="470" y2="200"></line>
+</g>
+<g font-family="IBM Plex Mono, monospace" font-size="11" fill="#7E8AA3" text-anchor="end">
+<text x="34" y="24">0.6</text>
+<text x="34" y="84">0.4</text>
+<text x="34" y="144">0.2</text>
+<text x="34" y="204">0</text>
+</g>
+<g fill="#2B4BD8">
+<rect x="52" y="74" width="34" height="126" rx="3"></rect>
+<rect x="106" y="186" width="34" height="14" rx="3"></rect>
+<rect x="160" y="182" width="34" height="18" rx="3"></rect>
+<rect x="214" y="164" width="34" height="36" rx="3"></rect>
+<rect x="268" y="188" width="34" height="12" rx="3"></rect>
+<rect x="322" y="180" width="34" height="20" rx="3"></rect>
+<rect x="376" y="184" width="34" height="16" rx="3"></rect>
+<rect x="430" y="92" width="34" height="108" rx="3"></rect>
+</g>
+<g stroke="#E39A3B" stroke-width="2" fill="none">
+<path d="M69 60 V90 M63 60 H75 M63 90 H75"></path>
+<path d="M123 180 V192 M117 180 H129 M117 192 H129"></path>
+<path d="M177 172 V190 M171 172 H183 M171 190 H183"></path>
+<path d="M231 138 V188 M225 138 H237 M225 188 H237"></path>
+<path d="M285 182 V194 M279 182 H291 M279 194 H291"></path>
+<path d="M339 172 V188 M333 172 H345 M333 188 H345"></path>
+<path d="M393 178 V190 M387 178 H399 M387 190 H399"></path>
+<path d="M447 80 V104 M441 80 H453 M441 104 H453"></path>
+</g>
+<g font-family="IBM Plex Mono, monospace" font-size="12" fill="#C9D2E3" text-anchor="middle">
+<text x="69" y="222">|000⟩</text>
+<text x="123" y="222">|001⟩</text>
+<text x="177" y="222">|010⟩</text>
+<text x="231" y="222">|011⟩</text>
+<text x="285" y="222">|100⟩</text>
+<text x="339" y="222">|101⟩</text>
+<text x="393" y="222">|110⟩</text>
+<text x="447" y="222">|111⟩</text>
+</g>
+<text x="231" y="250" font-family="IBM Plex Mono, monospace" font-size="11" fill="#E39A3B" text-anchor="middle">widest spread: flag as noisy</text>
+</svg>
+<figcaption style="font-size: 13px; line-height: 1.5; color: #A9B4C8">The kind of question Q-VTK answers: which output states can you trust, and which ones does the hardware distort?</figcaption>
+</figure>
+</div>
+</header>
 
-  </main>
+<main>
 
-  <footer>
-    <small>© <span id="y"></span> Your Name · Built with GitHub Pages</small>
-  </footer>
+<!-- LAYERS -->
+<section id="layers" style="max-width: 1200px; margin: 0 auto; padding: 80px 24px 40px; display: flex; flex-direction: column; gap: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">Four layers, one toolkit</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A5468">Quantum programs are hard to reason about because the things that matter cannot be printed: amplitudes, entanglement, gate effects, device noise and trained parameters. Q-VTK gives each of these a visual form.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+<div style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #2B4BD8">|ψ⟩</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Quantum states</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5468">Amplitudes, superposition and entanglement for one and two qubits.</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">VENUS</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #2B4BD8">U(θ)</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Quantum circuits</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5468">How each gate changes the state, step by step through the circuit.</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">QuantumEyes</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #2B4BD8">ε ≠ 0</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Noisy hardware</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5468">Device noise, compiled-circuit fidelity and which output states the noise distorts.</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">VACSEN · Basis-State Views · NoiseLens</p>
+</div>
+<div style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 22px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 22px; color: #2B4BD8">QNN</span>
+<h3 style="margin: 0; font-size: 19px; font-weight: 600">Quantum machine learning</h3>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #4A5468">Data encoding, ansatz training and measurement inside quantum neural networks.</p>
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">VIOLET · Encoder Explorer</p>
+</div>
+</div>
+</section>
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-  </script>
+<!-- MODULES -->
+<section id="modules" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 40px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">The modules</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A5468">Each module comes from a peer-reviewed paper. The tag on each card names the layer it serves and the paper it is built on.</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 20px">
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">VENUS</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #D5D9E0; border-radius: 999px; padding: 4px 10px">STATES · EuroVis 2023</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">A 2D geometric view of quantum states that shows entanglement and superposition.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">The Bloch sphere cannot show entanglement and can hide details through 3D occlusion. VENUS maps quantum amplitudes to 2D shapes grounded in the math of quantum computing, for single qubits and entangled pairs, and uses coordinated semicircles to show the probability distribution.</p>
+<p style="margin: 0; font-size: 13px; color: #4A5468">Evaluated with two case studies and an expert interview.</p>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">QuantumEyes</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #D5D9E0; border-radius: 999px; padding: 4px 10px">CIRCUITS · IEEE TVCG 2024</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">Explains what a quantum circuit does, gate by gate.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">At the global level, a Probability Summary View, a State Evolution View and a Gate Explanation View trace how gates change the quantum state. At the local level, the Dandelion Chart shows how amplitudes determine the probability of each basis state.</p>
+<p style="margin: 0; font-size: 13px; color: #4A5468">Evaluated with two case studies and interviews with 12 domain experts.</p>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">VACSEN</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #D5D9E0; border-radius: 999px; padding: 4px 10px">NOISE · IEEE VIS 2022 / TVCG</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">Noise-aware choice of quantum computer and compiled circuit.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">Linked views track each machine's performance metrics over time, filter compiled circuits to the most promising ones, and compare qubit and gate usage. Fidelity and probability-distribution views show the expected result quality, so users can pick the setup with the highest fidelity instead of trial and error.</p>
+<p style="margin: 0; font-size: 13px; color: #4A5468">Evaluated with two case studies on quantum algorithms of different scales.</p>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">Basis-State Views</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #D5D9E0; border-radius: 999px; padding: 4px 10px">NOISE · QCCC 2023</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">Compares output distributions across quantum computers and simulators.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">For the circuits of a quantum machine learning application, this module plots the distribution of every basis state on several quantum computers and on noise-free simulators, and draws a heat map of the KL distance between states. Users see at a glance where real hardware departs from the ideal result.</p>
+<p style="margin: 0; font-size: 13px; color: #4A5468">Built with Oak Ridge National Laboratory.</p>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">NoiseLens</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #D5D9E0; border-radius: 999px; padding: 4px 10px">NOISE · IEEE QSW 2025</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">Separates noisy from less noisy basis states automatically.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">A four-step pipeline: KL divergence between every pair of basis states, a 2D map by multidimensional scaling, k-means clustering, and violin plots that flag high-variance clusters as noisy. Demonstrated on a 7-qubit MNIST classifier with about 8,000 circuit runs on IBM Lagos, Nairobi and Perth, with far less clutter than functional box plots.</p>
+<p style="margin: 0; font-size: 13px; color: #4A5468">Built with Oak Ridge National Laboratory. <a href="https://github.com/psenap/QSW_Quantum_Visualization">Source code on GitHub</a></p>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">VIOLET</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #D5D9E0; border-radius: 999px; padding: 4px 10px">QML · IEEE TVCG 2024</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">Opens the black box of quantum neural networks.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">Coordinated views explain the three quantum-specific parts of a QNN: how input data is encoded into quantum states, how the ansatz evolves during training, and what the final measurements mean. It introduced new visual designs, including an augmented heat map, and was the first visualization work aimed at explainable quantum machine learning.</p>
+<p style="margin: 0; font-size: 13px; color: #4A5468">Evaluated with two case studies and interviews with 12 domain experts.</p>
+</article>
+
+<article style="background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">Encoder Explorer</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #D5D9E0; border-radius: 999px; padding: 4px 10px">QML · PacificVis 2026 / TVCG</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">Helps choose a data encoder for a QNN before training.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">Picking a quantum data encoder is usually trial and error, because encoded states are hard to evaluate before training and there are few intuitive ways to compare encoders. This module visualizes the encoded quantum states so users can compare encoders and make an informed choice up front.</p>
+<p style="margin: 0; font-size: 13px; color: #4A5468">A step toward explainable quantum AI.</p>
+</article>
+
+<article style="background: #E9ECF8; border: 1px solid #C7CFEE; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: baseline">
+<h3 style="margin: 0; font-size: 22px; font-weight: 700">Field guide</h3>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: #4A5468; border: 1px solid #C7CFEE; border-radius: 999px; padding: 4px 10px">SURVEY</span>
+</div>
+<p style="margin: 0; font-size: 16px; font-weight: 500; line-height: 1.5">Where Q-VTK sits in the wider field.</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">Our survey, Visualization for Quantum Computing: Current State and Future Directions, reviews existing visualization approaches for quantum computing and lays out open problems. It shapes the roadmap for new Q-VTK modules.</p>
+</article>
+
+</div>
+</section>
+
+<!-- WORKFLOW -->
+<section id="workflow" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 40px; display: flex; flex-direction: column; gap: 28px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">Use it across the whole workflow</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A5468">The modules follow a quantum program from design to results. Start wherever your question is.</p>
+</div>
+<ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px">
+<li style="background: #FFFFFF; border: 1px solid #D5D9E0; border-top: 4px solid #2B4BD8; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">Step 1</span>
+<strong style="font-size: 16px">Understand the states</strong>
+<span style="font-size: 14px; line-height: 1.5; color: #4A5468">VENUS</span>
+</li>
+<li style="background: #FFFFFF; border: 1px solid #D5D9E0; border-top: 4px solid #2B4BD8; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">Step 2</span>
+<strong style="font-size: 16px">Debug the circuit</strong>
+<span style="font-size: 14px; line-height: 1.5; color: #4A5468">QuantumEyes</span>
+</li>
+<li style="background: #FFFFFF; border: 1px solid #D5D9E0; border-top: 4px solid #2B4BD8; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">Step 3</span>
+<strong style="font-size: 16px">Design the QNN</strong>
+<span style="font-size: 14px; line-height: 1.5; color: #4A5468">Encoder Explorer · VIOLET</span>
+</li>
+<li style="background: #FFFFFF; border: 1px solid #D5D9E0; border-top: 4px solid #2B4BD8; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">Step 4</span>
+<strong style="font-size: 16px">Pick the hardware</strong>
+<span style="font-size: 14px; line-height: 1.5; color: #4A5468">VACSEN</span>
+</li>
+<li style="background: #FFFFFF; border: 1px solid #D5D9E0; border-top: 4px solid #2B4BD8; border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: #4A5468">Step 5</span>
+<strong style="font-size: 16px">Diagnose the results</strong>
+<span style="font-size: 14px; line-height: 1.5; color: #4A5468">Basis-State Views · NoiseLens</span>
+</li>
+</ol>
+</section>
+
+<!-- TUTORIAL -->
+<section id="tutorial" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 40px">
+<div style="background: #0E1626; color: #E8ECF4; border-radius: 16px; padding: 40px; display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+<div style="flex: 1 1 460px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<p style="margin: 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.06em; color: #E39A3B">TUTORIAL · ASPLOS 2026</p>
+<h2 style="margin: 0; font-size: 32px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 700; color: #FFFFFF">Learn Q-VTK hands-on</h2>
+<p style="margin: 0; font-size: 17px; line-height: 1.6; color: #C9D2E3">We presented a tutorial on Q-VTK at the ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS 2026). It introduced the toolkit to researchers in computer architecture and systems.</p>
+</div>
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 10px; background: #16213A; border: 1px solid #26355A; border-radius: 12px; padding: 22px">
+<strong style="font-size: 16px; color: #FFFFFF">Tutorial materials</strong>
+<span style="font-size: 15px; line-height: 1.55; color: #C9D2E3">Slides: [ADD LINK]</span>
+<span style="font-size: 15px; line-height: 1.55; color: #C9D2E3">Hands-on notebooks: [ADD LINK]</span>
+<span style="font-size: 15px; line-height: 1.55; color: #C9D2E3">Q-VTK repository: [ADD LINK]</span>
+</div>
+</div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 40px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 12px; max-width: 760px">
+<h2 style="margin: 0; font-size: 36px; line-height: 1.15; letter-spacing: -0.02em; font-weight: 700">Publications</h2>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: #4A5468">Please cite the paper behind each module you use.</p>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; border-top: 1px solid #D5D9E0">
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">2026</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">S. Ruan, F. Liang, R. Ramakrishna, C. Ren, R. Yan, Q. Guan, J. Li, and Y. Wang, “Towards Explainable Quantum AI: Informing the Encoder Selection of Quantum Neural Networks via Visualization,” <em>IEEE Transactions on Visualization and Computer Graphics</em> (PacificVis 2026 TVCG Track), 2026. <a href="https://arxiv.org/abs/2512.14181">arXiv:2512.14181</a></span>
+</li>
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">2025</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">P. Senapati, Q. Guan, D. Pugmire, C.-C. Lu, and T. M. Athawale, “Visualization of Noisy and Less Noisy Computational Basis States in Quantum Computing,” in <em>Proc. IEEE International Conference on Quantum Software (QSW)</em>, pp. 12–21, 2025. <a href="https://doi.org/10.1109/QSW67625.2025.00011">doi:10.1109/QSW67625.2025.00011</a></span>
+</li>
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">2024</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">S. Ruan, Z. Liang, Q. Guan, P. Griffin, X. Wen, Y. Lin, and Y. Wang, “VIOLET: Visual Analytics for Explainable Quantum Neural Networks,” <em>IEEE Transactions on Visualization and Computer Graphics</em>, vol. 30, no. 6, pp. 2862–2874, 2024. <a href="https://doi.org/10.1109/TVCG.2024.3388557">doi:10.1109/TVCG.2024.3388557</a></span>
+</li>
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">2024</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">S. Ruan, Q. Guan, P. Griffin, Y. Mao, and Y. Wang, “QuantumEyes: Towards Better Interpretability of Quantum Circuits,” <em>IEEE Transactions on Visualization and Computer Graphics</em>, 2024. <a href="https://arxiv.org/abs/2311.07980">arXiv:2311.07980</a></span>
+</li>
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">2023</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">S. Ruan, R. Yuan, Q. Guan, Y. Lin, Y. Mao, W. Jiang, Z. Wang, W. Xu, and Y. Wang, “VENUS: A Geometrical Representation for Quantum State Visualization,” <em>Computer Graphics Forum</em> (EuroVis 2023), vol. 42, no. 3, pp. 247–258, 2023. <a href="https://doi.org/10.1111/cgf.14827">doi:10.1111/cgf.14827</a></span>
+</li>
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">2023</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">S. Ruan, Y. Wang, W. Jiang, Y. Mao, and Q. Guan, “VACSEN: A Visualization Approach for Noise Awareness in Quantum Computing,” <em>IEEE Transactions on Visualization and Computer Graphics</em> (IEEE VIS 2022), vol. 29, no. 1, pp. 462–472, 2023. <a href="https://doi.org/10.1109/TVCG.2022.3209455">doi:10.1109/TVCG.2022.3209455</a></span>
+</li>
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">2023</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">P. Senapati, T. M. Athawale, D. Pugmire, and Q. Guan, “Advancing Comprehension of Quantum Application Outputs: A Visualization Technique,” in <em>Proc. International Workshop on Quantum Classical Cooperative Computing (QCCC)</em>, pp. 25–28, 2023.</span>
+</li>
+<li style="padding: 18px 0; border-bottom: 1px solid #D5D9E0; display: flex; flex-wrap: wrap; gap: 8px 24px">
+<span style="flex: 0 0 64px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: #4A5468; font-variant-numeric: tabular-nums">Survey</span>
+<span style="flex: 1 1 520px; min-width: 0; font-size: 15px; line-height: 1.6">F. Liang, X. Wen, S. Zhou, S. Ruan, Y. Du, Q. Guan, J. Ye, et al., “Visualization for Quantum Computing: Current State and Future Directions,” [VENUE, YEAR].</span>
+</li>
+</ol>
+</section>
+
+<!-- TEAM + RESOURCES -->
+<section id="resources" style="max-width: 1200px; margin: 0 auto; padding: 48px 24px 72px; display: flex; flex-wrap: wrap; gap: 20px">
+<div style="flex: 1 1 360px; min-width: 0; background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 24px; font-weight: 700">Built by</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">Q-VTK is led by the GUANS Lab in the Department of Computer Science at Kent State University, with collaborators at Singapore Management University, Nanyang Technological University, Oak Ridge National Laboratory, Fordham University and George Mason University.</p>
+</div>
+<div style="flex: 1 1 360px; min-width: 0; background: #FFFFFF; border: 1px solid #D5D9E0; border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 12px">
+<h2 style="margin: 0; font-size: 24px; font-weight: 700">Get the code</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">Q-VTK repository: [ADD LINK]</p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">NoiseLens pipeline: <a href="https://github.com/psenap/QSW_Quantum_Visualization">github.com/psenap/QSW_Quantum_Visualization</a></p>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #4A5468">Contact: [CONTACT EMAIL]</p>
+</div>
+</section>
+
+</main>
+
+<footer style="border-top: 1px solid #D5D9E0">
+<div style="max-width: 1200px; margin: 0 auto; padding: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 14px; color: #4A5468">
+<span style="font-family: 'IBM Plex Mono', monospace">|Q-VTK⟩ Quantum Visualization Toolkit</span>
+<span>Supported by the U.S. National Science Foundation [AWARD NUMBERS].</span>
+</div>
+</footer>
+
+</div>
 </body>
 </html>
